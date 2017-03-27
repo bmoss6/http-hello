@@ -156,8 +156,12 @@ app.delete('/', function(req, res){
     return res.status('401').send("Not logged in! Go to /signin!");
   }
   else {
-    var key = req.key;
-    return res.status('200').send("Key Value Pairs for " + req.user.username + " : " + req.user.keypair);
+    var url = require('url');
+    var url_parts = url.parse(req.url, true);
+    var query = url_parts.query;
+    var key = query.key;
+    console.log("Here is the key " + key);
+    return res.status('200').send(req.user.keypair);
   }
 
 });
