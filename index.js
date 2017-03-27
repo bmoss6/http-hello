@@ -139,8 +139,9 @@ app.put('/', function(req, res){
   var value = query.value;
   //  console.log(query);
     console.log("In PUT function: " + key);
-    console.log(req.user.keypair);
 
+    req.user.keypair[key].value;
+      console.log(req.user.keypair);
 
       return res.status('200').send(req.user.keypair);
   }
