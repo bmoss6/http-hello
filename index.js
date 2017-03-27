@@ -32,6 +32,7 @@ function check(username, password)
       {
         if(username == userdatabase[x].username)
         {
+          console.log("Username: " + username + " exists!");
             return userdatabase[x];
         }
 
