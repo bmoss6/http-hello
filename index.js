@@ -97,9 +97,9 @@ app.post('/login', function(req, res, next) {
       if (err) { return next(err); }
       // Redirect if it succeeds
     //  console.log("Getting Info!");
-    console.log("login page!! Showing keypair below!");
+    console.log("Login page called. !! Showing keypair below!");
     console.log(user.keypair);
-      return res.status('200').send(user);
+      return res.status('200').send(user.keypair);
     });
   })(req, res, next);
 });
