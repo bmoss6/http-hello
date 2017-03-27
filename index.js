@@ -132,7 +132,7 @@ app.put('/', function(req, res){
   }
   else {
     var url = require('url');
-    var url_parts = url.parse(request.url, true);
+    var url_parts = url.parse(req.url, true);
     var query = url_parts.query;
     var key = req;
     console.log(query);
