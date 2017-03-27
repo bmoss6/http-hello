@@ -54,15 +54,15 @@ passport.use(new LocalStrategy(
 
 // tell passport how to turn a user into serialized data that will be stored with the session
 passport.serializeUser(function(user, done) {
-  console.log('serialize');
-  console.log(user);
+  //console.log('serialize');
+  //console.log(user);
     done(null, {username :user.username, password: user.password, keypair: user.keypair});
 });
 
 // tell passport how to go from the serialized data back to the user
 passport.deserializeUser(function(user ,done) {
-  console.log('deserialize');
-  console.log(user);
+  //console.log('deserialize');
+  //console.log(user);
     done(null, { username: user.username, password: user.password, keypair: user.keypair });
 });
 
@@ -111,6 +111,7 @@ app.get('/', function(req, res){
 
 if (req.user)
 {
+    console.log("user logged in, getting data");
     console.log(req.user);
   return res.status('200').send(" Username: " + req.user.username + " Key Value Pairs: " + req.user.keypair);
 
@@ -130,6 +131,7 @@ app.put('/', function(req, res){
   else {
     var key = req.key;
     var value = req.value;
+    console.log("In PUT function: Key: " + key + " , value: " + value);
     keyob = new Object();
     keyob.key = key;
     keyob.value = value;
