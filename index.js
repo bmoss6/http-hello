@@ -15,7 +15,7 @@ function check(username, password)
 {
   console.log("Checking to see if username exists!");
   console.log(userdatabase);
-  
+
 
   if (userdatabase.length == 0)
   {
@@ -103,15 +103,15 @@ app.post('/login', function(req, res, next) {
       if (err) { return next(err); }
       // Redirect if it succeeds
     //  console.log("Getting Info!");
-    console.log("Login page called. !! Showing keypair below!");
-    console.log(req.user.keypair);
+  //  console.log("Login page called. !! Showing keypair below!");
+  //  console.log(req.user.keypair);
       return res.status('200').send(user.keypair);
     });
   })(req, res, next);
 });
 
 app.get('/logout', function(req, res){
-  console.log('logout');
+//  console.log('logout');
   req.logout();
   res.redirect('/signin');
 });
@@ -147,7 +147,7 @@ app.put('/', function(req, res){
     console.log("In PUT function: " + key);
 
     req.user.keypair[key] = value;
-      console.log(req.user.keypair);
+  //    console.log(req.user.keypair);
 
       return res.status('200').send(req.user.keypair);
   }
@@ -166,14 +166,14 @@ app.delete('/', function(req, res){
     var url_parts = url.parse(req.url, true);
     var query = url_parts.query;
     var key = query.key;
-    console.log("IN DELETE FUNCTION!!");
-    console.log("Here is the key " + key);
+  //  console.log("IN DELETE FUNCTION!!");
+  //  console.log("Here is the key " + key);
     if(key in req.user.keypair)
     {
-      console.log("found the key!");
+    //  console.log("found the key!");
       delete req.user.keypair[key];
-      console.log("Deleted " + key);
-      console.log(req.user.keypair);
+    //  console.log("Deleted " + key);
+    //  console.log(req.user.keypair);
     }
     return res.status('200').send(req.user.keypair);
   }
