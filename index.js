@@ -13,8 +13,8 @@ var userdatabase = [];
 
 function check(username, password)
 {
-  console.log("Checking to see if username exists!");
-  console.log(userdatabase);
+//  console.log("Checking to see if username exists!");
+//  console.log(userdatabase);
 
 
   if (userdatabase.length == 0)
@@ -29,12 +29,12 @@ function check(username, password)
 
   else
   {
-    console.log("Checking for the username here!");
+  //  console.log("Checking for the username here!");
       for (var x = 0;  x <userdatabase.length; x ++)
       {
         if(username == userdatabase[x].username)
         {
-          console.log("Username: " + username + " exists!");
+    //      console.log("Username: " + username + " exists!");
             return userdatabase[x];
         }
 
@@ -150,7 +150,7 @@ app.put('/', function(req, res){
   var key = query.key;
   var value = query.value;
   //  console.log(query);
-    console.log("In PUT function: " + key);
+  //  console.log("In PUT function: " + key);
 
     req.user.keypair[key] = value;
   //    console.log(req.user.keypair);
@@ -200,7 +200,7 @@ app.delete('/', function(req, res){
 
 
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
+//  console.log('Example app listening on port 3000!')
 })
 
 
