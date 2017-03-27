@@ -176,19 +176,23 @@ app.delete('/', function(req, res){
   }
   else {
     var url = require('url');
+    var fin;
     var url_parts = url.parse(req.url, true);
     var query = url_parts.query;
     var key = query.key;
   //  console.log("IN DELETE FUNCTION!!");
   //  console.log("Here is the key " + key);
-    if(key in req.user.keypair)
-    {
-    //  console.log("found the key!");
-      delete req.user.keypair[key];
-    //  console.log("Deleted " + key);
-    //  console.log(req.user.keypair);
-    }
-    return res.status('200').send(req.user.keypair);
+  for (var t =0; t<userdatabase.length; t++)
+  {
+      if (key in userdatabase[t].keypair)
+      {
+        delete userdatabase[t].keypair[key];
+        fin = userdatabase[t].keypair;
+      }
+
+  }
+
+    return res.status('200').send(fin);
   }
 
 });
