@@ -41,8 +41,7 @@ function check(username, password)
       }
       var userob = new Object();
       userob.username= username;
-      userob.passwords = [];
-      userob.passwords.push(password);
+      userob.password = password;
       userob.keypair = {};
       userdatabase.push(userob);
       return userob;
