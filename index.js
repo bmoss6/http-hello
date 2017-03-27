@@ -96,7 +96,8 @@ app.post('/login', function(req, res, next) {
     req.logIn(user, function(err) {
       if (err) { return next(err); }
       // Redirect if it succeeds
-      return res.status('200').send( user.username + " , " +  user.password + " Keypairs = " + user.keypair);
+      console.log("Getting Info!");
+      return res.status('200').send(user.keypair);
     });
   })(req, res, next);
 });
