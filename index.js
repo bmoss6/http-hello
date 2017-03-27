@@ -129,12 +129,11 @@ app.put('/', function(req, res){
     return res.status('401').send("Not logged in! Go to /signin!");
   }
   else {
-    var key = req.body;
-
+    var key = JSON.parse(req.body);
     console.log("In PUT function: " + key);
     keyob = new Object();
     keyob.key = key;
-  
+
     req.user.keypair.push(keyob);
     console.log(req.user);
       return res.status('200').send("Key Value Pairs for " + req.user.username + " : " + req.user.keypair);
