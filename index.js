@@ -139,7 +139,7 @@ app.put('/', function(req, res){
   var value = query.value;
   //  console.log(query);
     console.log("In PUT function: " + key);
-    console.log(res.user.keypair);
+    console.log(req.user.keypair);
 
 
       return res.status('200').send(req.user.keypair);
