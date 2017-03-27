@@ -139,10 +139,9 @@ app.put('/', function(req, res){
   var value = query.value;
   //  console.log(query);
     console.log("In PUT function: " + key);
-    keyob = new Object();
-    keyob[key] = value;
-    req.user.keypair += keyob;
-    console.log("HEY HERE IS USER" + req.user.keypair);
+    console.log(res.user.keypair);
+
+
       return res.status('200').send(req.user.keypair);
   }
 
