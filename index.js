@@ -164,6 +164,7 @@ app.delete('/', function(req, res){
     console.log("Here is the key " + key);
     if(key in req.user.keypair)
     {
+      console.log("found the key!");
       delete req.user.keypair.key;
     }
     return res.status('200').send(req.user.keypair);
