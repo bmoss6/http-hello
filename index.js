@@ -131,7 +131,11 @@ app.put('/', function(req, res){
     return res.status('401').send("Not logged in! Go to /signin!");
   }
   else {
+    var url = require('url');
+    var url_parts = url.parse(request.url, true);
+    var query = url_parts.query;
     var key = req;
+    console.log(query);
     console.log("In PUT function: " + key);
     keyob = new Object();
     keyob.key = key;
