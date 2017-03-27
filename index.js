@@ -116,7 +116,7 @@ if (req.user)
 {
     console.log(" / page called!! showing req.user below");
     console.log(req.user);
-  return res.status('200').send(req.user);
+  return res.status('200').send(req.user.keypair);
 
 }
 else
