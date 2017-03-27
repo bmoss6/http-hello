@@ -148,6 +148,13 @@ app.put('/', function(req, res){
     req.user.keypair[key] = value;
   //    console.log(req.user.keypair);
 
+    for (var t =0; t<userdatabase.length; t++)
+    {
+      if( req.user.username==userdatabase[t].username)
+      {
+        userdatabase[t].keypair[key]=value;
+      }
+    }
       return res.status('200').send(req.user.keypair);
   }
 
