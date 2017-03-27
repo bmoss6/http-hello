@@ -14,6 +14,8 @@ var userdatabase = [];
 function check(username, password)
 {
   console.log("Checking to see if username exists!");
+  console.log(userdatabase);
+  
 
   if (userdatabase.length == 0)
   {
