@@ -161,6 +161,10 @@ app.delete('/', function(req, res){
     var query = url_parts.query;
     var key = query.key;
     console.log("Here is the key " + key);
+    if(key in req.user.keypair)
+    {
+      delete req.user.keypair.key;
+    }
     return res.status('200').send(req.user.keypair);
   }
 
