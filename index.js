@@ -13,25 +13,57 @@ var userdatabase = [];
 
 function check(username, password)
 {
+  if (userdatabase.length == 0)
+  {
+    var userob = new Object();
+    userob.username= username;
+    userob.password = password;
+    userob.keypair = [];
+    userdatabase.push(userob);
+    return userob;
+  }
 
+  else
+  {
+      for (var x = 0;  x <userdatabase.length; x ++)
+      {
+        if(username == userdatabase[x].username && password == userdatabase[x].password)
+        {
+            return userdatabase[x];
+        }
+
+      }
+      var userob = new Object();
+      userob.username= username;
+      userob.passwords = [];
+      userob.passwords.push(password);
+      userob.keypair = [];
+      userdatabase.push(userob);
+      return userob;
+
+  }
 
 }
 passport.use(new LocalStrategy(
   function(username, password, done) {
-    check(username,password);
+    var userob = check(username,password);
     //check database to see if username exists
-    return done(null, { username: username, password: password });
+    return done(null, { username: userob.username, password: userob.password, keypair: userob.keypair });
   }
 ));
 
 // tell passport how to turn a user into serialized data that will be stored with the session
 passport.serializeUser(function(user, done) {
-    done(null, user.username);
+  console.log('serialize');
+  console.log(user);
+    done(null, {username :user.username, password: user.password, keypair: user.keypair});
 });
 
 // tell passport how to go from the serialized data back to the user
-passport.deserializeUser(function(id, done) {
-    done(null, { username: id });
+passport.deserializeUser(function(user ,done) {
+  console.log('deserialize');
+  console.log(user);
+    done(null, { username: user.username, password: user.password, keypair: user.keypair });
 });
 
 // tell the express app what middleware to use
@@ -42,6 +74,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/signin', function (req, res) {
+  if(req.user)
+  {
+    res.redirect('/logout');
+  }
 res.sendFile('login.html', { root: path.join(__dirname, 'views') });
 })
 
@@ -60,11 +96,70 @@ app.post('/login', function(req, res, next) {
     req.logIn(user, function(err) {
       if (err) { return next(err); }
       // Redirect if it succeeds
-      return res.status('200').send( user.username + " , " +  user.password);
+      return res.status('200').send( user.username + " , " +  user.password + " Keypairs = " + user.keypair);
     });
   })(req, res, next);
 });
 
+app.get('/logout', function(req, res){
+  console.log('logout');
+  req.logout();
+  res.redirect('/signin');
+});
+
+app.get('/', function(req, res){
+
+if (req.user)
+{
+    console.log(req.user);
+  return res.status('200').send(" Username: " + req.user.username + " Key Value Pairs: " + req.user.keypair);
+
+}
+else
+{
+  return res.status('401').send("Not logged in! Go to /signin!");
+}
+});
+
+app.put('/', function(req, res){
+
+  if (!req.user)
+  {
+    return res.status('401').send("Not logged in! Go to /signin!");
+  }
+  else {
+    var key = req.key;
+    var value = req.value;
+    keyob = new Object();
+    keyob.key = key;
+    keyob.value = value;
+    req.user.keypair.push(keyob);
+    console.log(req.user);
+      return res.status('200').send("Key Value Pairs for " + req.user.username + " : " + req.user.keypair);
+  }
+
+});
+
+
+app.delete('/', function(req, res){
+
+  if (!req.user)
+  {
+    return res.status('401').send("Not logged in! Go to /signin!");
+  }
+  else {
+    var key = req.key;
+    for (var x = 0; x<req.user.keypair.length; x++)
+    {
+      if(key == req.user.keypair[x].key)
+      {
+        req.user.keypair.splice(x,1);
+      }
+    }
+    return res.status('200').send("Key Value Pairs for " + req.user.username + " : " + req.user.keypair);
+  }
+
+});
 
 
 
