@@ -141,7 +141,7 @@ app.put('/', function(req, res){
     keyob = new Object();
     keyob[key] = value;
     req.user.keypair.push(keyob);
-    console.log("HEY HERE IS USER" + req.user);
+    console.log("HEY HERE IS USER" + req.user.keypair);
       return res.status('200').send(req.user.keypair);
   }
 
