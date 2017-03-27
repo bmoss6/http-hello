@@ -37,7 +37,7 @@ function check(username, password)
       userob.username= username;
       userob.passwords = [];
       userob.passwords.push(password);
-      userob.keypair = [];
+      userob.keypair = {};
       userdatabase.push(userob);
       return userob;
 
@@ -141,7 +141,7 @@ app.put('/', function(req, res){
     console.log("In PUT function: " + key);
     keyob = new Object();
     keyob[key] = value;
-    req.user.keypair.push(keyob);
+    req.user.keypair += keyob;
     console.log("HEY HERE IS USER" + req.user.keypair);
       return res.status('200').send(req.user.keypair);
   }
@@ -157,13 +157,6 @@ app.delete('/', function(req, res){
   }
   else {
     var key = req.key;
-    for (var x = 0; x<req.user.keypair.length; x++)
-    {
-      if(key == req.user.keypair[x].key)
-      {
-        req.user.keypair.splice(x,1);
-      }
-    }
     return res.status('200').send("Key Value Pairs for " + req.user.username + " : " + req.user.keypair);
   }
 
