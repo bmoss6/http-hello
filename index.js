@@ -116,12 +116,19 @@ app.get('/logout', function(req, res){
 });
 
 app.get('/', function(req, res){
-
+var getit;
 if (req.user)
 {
   //  console.log(" / page called!! showing req.user below");
   //  console.log(req.user);
-  return res.status('200').send(req.user.keypair);
+  for (var t = 0; t<userdatabase.length; t++)
+  {
+    if(req.user.username = userdatabase[t].username)
+    {
+      getit = userdatabase[t].keypair;
+    }
+  }
+  return res.status('200').send(getit);
 
 }
 else
