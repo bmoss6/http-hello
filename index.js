@@ -114,8 +114,8 @@ app.get('/', function(req, res){
 
 if (req.user)
 {
-    console.log(" / page called!! showing req.user below");
-    console.log(req.user);
+  //  console.log(" / page called!! showing req.user below");
+  //  console.log(req.user);
   return res.status('200').send(req.user.keypair);
 
 }
@@ -160,6 +160,7 @@ app.delete('/', function(req, res){
     var url_parts = url.parse(req.url, true);
     var query = url_parts.query;
     var key = query.key;
+    console.log("IN DELETE FUNCTION!!");
     console.log("Here is the key " + key);
     if(key in req.user.keypair)
     {
