@@ -13,6 +13,8 @@ var userdatabase = [];
 
 function check(username, password)
 {
+  console.log("Checking to see if username exists!");
+
   if (userdatabase.length == 0)
   {
     var userob = new Object();
@@ -25,9 +27,10 @@ function check(username, password)
 
   else
   {
+    console.log("Checking for the username here!");
       for (var x = 0;  x <userdatabase.length; x ++)
       {
-        if(username == userdatabase[x].username && password == userdatabase[x].password)
+        if(username == userdatabase[x].username)
         {
             return userdatabase[x];
         }
