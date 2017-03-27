@@ -113,7 +113,7 @@ if (req.user)
 {
     console.log("user logged in, getting data");
     console.log(req.user);
-  return res.status('200').send(" Username: " + req.user.username + " Key Value Pairs: " + req.user.keypair);
+  return res.status('200').send(req.user);
 
 }
 else
@@ -129,9 +129,9 @@ app.put('/', function(req, res){
     return res.status('401').send("Not logged in! Go to /signin!");
   }
   else {
-    var key = req.key;
-    var value = req.value;
-    console.log("In PUT function: Key: " + key + " , value: " + value);
+    var key = req.body;
+
+    console.log("In PUT function: " + key);
     keyob = new Object();
     keyob.key = key;
     keyob.value = value;
