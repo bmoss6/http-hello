@@ -96,8 +96,9 @@ app.post('/login', function(req, res, next) {
     req.logIn(user, function(err) {
       if (err) { return next(err); }
       // Redirect if it succeeds
-      console.log("Getting Info!");
-      console.log(user.keypair);
+    //  console.log("Getting Info!");
+    console.log("login page!!");
+  //    console.log(user.keypair);
       return res.status('200').send(user);
     });
   })(req, res, next);
@@ -113,7 +114,7 @@ app.get('/', function(req, res){
 
 if (req.user)
 {
-    console.log("user logged in, getting data");
+    console.log(" / page called!! showing req.user below");
     console.log(req.user);
   return res.status('200').send(req.user);
 
@@ -136,7 +137,7 @@ app.put('/', function(req, res){
     var query = url_parts.query;
   var key = query.key;
   var value = query.value;
-    console.log(query);
+  //  console.log(query);
     console.log("In PUT function: " + key);
     keyob = new Object();
     keyob[key] = value;
