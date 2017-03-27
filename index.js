@@ -134,12 +134,13 @@ app.put('/', function(req, res){
     var url = require('url');
     var url_parts = url.parse(req.url, true);
     var query = url_parts.query;
-    var key = req;
+  var key = query.key;
+  var value = query.value;
     console.log(query);
     console.log("In PUT function: " + key);
     keyob = new Object();
     keyob.key = key;
-
+    keyob.value = value;
     req.user.keypair.push(keyob);
     console.log(req.user);
       return res.status('200').send("Key Value Pairs for " + req.user.username + " : " + req.user.keypair);
