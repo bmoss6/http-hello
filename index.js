@@ -94,7 +94,7 @@ app.get('/health', function (req, res) {
 
 
 app.post('/login', function(req, res, next) {
-  passport.authenticate('local', function(err, user, info) {
+  passport.authenticate('local', function(err, user) {
     if (err) { return next(err); }
     // Redirect if it fails
     if (!user) { return res.redirect('/signin'); }
